@@ -2,7 +2,7 @@ import subprocess
 
 def broker_active():
     result = subprocess.run(
-        ["systemctl", "is-active", "--quit", "mosquitto"]
+        ["systemctl", "is-active", "mosquitto"]
     )
     return result.returncode == 0
 
