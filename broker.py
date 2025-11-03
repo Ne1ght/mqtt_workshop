@@ -2,6 +2,7 @@ import subprocess
 
 def broker_installed():
     result = subprocess.run(["mosquitto", "-h"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    print(result)
     return result.returncode == 0
 
 def install_broker():
