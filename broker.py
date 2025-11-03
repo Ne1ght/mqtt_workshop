@@ -1,7 +1,7 @@
 import subprocess
 
 def broker_installed():
-    result = subprocess.run(["mosquitto", "-h"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    result = subprocess.run(["which", "mosquitto"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     print(result)
     return result.returncode == 0
 
