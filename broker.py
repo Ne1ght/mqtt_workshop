@@ -42,15 +42,15 @@ def created_tmux_session(): #starts tmux to manage the mqtt session
     return True
 
 def is_running(mos_part): #checks logic for the publisher and subscriber
-    result = subprocess.run(["tmux", "send-keys", "-t", "mqtt_session:0.0", "pgrep", "-f", mos_part], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    result = subprocess.run(["pgrep", "-f", mos_part], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
 def kill_process(process_name):
-    result = subprocess.run(["tmux", "send-keys", "-t", "mqtt_session:0.0", "pkill", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    result = subprocess.run(["pkill", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
 def start_process(process_name):
-    result = subprocess.run(["tmux", "send-keys", "-t", "mqtt_session:0.0", "python3", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    result = subprocess.run(["python3", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
 if broker_installed(): #calls the functions to check if the broker is installed and if not installs it
