@@ -11,7 +11,6 @@ subprocess.run(cmd, shell=True)
 
 
 for i in range(10, 0, -1):
-    print(f"Attaching tmux in {i} seconds")
     time.sleep(1)
 
 
