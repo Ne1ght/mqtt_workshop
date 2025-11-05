@@ -22,6 +22,26 @@ def broker_active(): #checks if the broker is running
     )
     return result.returncode == 0
 
+def tmux_installed(): #checks if tmux is installed
+    result = subprocess.run(["which", "tmux"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return result.returncode == 0
+
+def install_tmux(): #installs tmux
+    installing_tmux = subprocess.run(["sudo", "apt", "install", "-y", "tmux"], capture_output=True, text=True)
+    if installing_tmux.returncode != 0:
+        print("tmux installation failed:", installing_tmux.stderr)
+        return False
+    return True
+
+def created_tmux_session(): #starts tmux to manage the mqtt session
+    result = subprocess.run(["tmux", "new-session", "-d", "-s", "mqtt_session"], capture_output=True, text=True)
+    if result.returncode != 0:
+        print("tmux session creation failed:", result.stderr)
+        return False
+    print("tmux session created successfully")
+    return True
+
+
 def is_running(mos_part): #checks logic for the publisher and subscriber
     result = subprocess.run(["pgrep", "-f", mos_part], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
@@ -36,6 +56,20 @@ else:
         else:
             print("installation failed")
             exit(1)
+
+if tmux_installed(): #calls the functions to check, install and start tmux to manage the mqtt session in ssh over one window
+    print("tmux is installed")
+    print("starting tmux now.")
+    created_tmux_session()
+else:
+    print("tmux is not installed!")
+    print("installing tmux now.")
+    if install_tmux():
+        print("tmux installation successful")
+        print("starting tmux now.")
+        created_tmux_session()
+    else:
+        print("tmux could not be installed! Please review code and fix.")
 
 
 if broker_active(): #calls the function to check if the broker is active
