@@ -53,22 +53,6 @@ def start_process(process_name):
     result = subprocess.run(["python3", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
-if broker_installed(): #calls the functions to check if the broker is installed and if not installs it
-    print("broker is installed")
-else:
-    print("broker is not installed")
-    if input("Do you want to install it? (yes/no) ").strip().lower() == "yes":
-        if install_broker():
-            print("Broker and client installed successfully")
-        else:
-            print("installation failed")
-            exit(1)
-
-if broker_active(): #calls the function to check if the broker is active
-    print("broker is running")
-else:
-    print("broker is not running")
-
 if tmux_installed(): #calls the functions to check, install and start tmux to manage the mqtt session in ssh over one window
     print("tmux is installed")
     print("starting tmux now.")
@@ -85,6 +69,21 @@ else:
     else:
         print("tmux could not be installed! Please review code and fix.")
 
+if broker_installed(): #calls the functions to check if the broker is installed and if not installs it
+    print("broker is installed")
+else:
+    print("broker is not installed")
+    if input("Do you want to install it? (yes/no) ").strip().lower() == "yes":
+        if install_broker():
+            print("Broker and client installed successfully")
+        else:
+            print("installation failed")
+            exit(1)
+
+if broker_active(): #calls the function to check if the broker is active
+    print("broker is running")
+else:
+    print("broker is not running")
 
 if is_running("mosquitto_pub"):
     print("publisher is running")
