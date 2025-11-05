@@ -41,9 +41,16 @@ def created_tmux_session(): #starts tmux to manage the mqtt session
     print("tmux session created successfully")
     return True
 
-
 def is_running(mos_part): #checks logic for the publisher and subscriber
     result = subprocess.run(["pgrep", "-f", mos_part], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return result.returncode == 0
+
+def kill_process(process_name):
+    result = subprocess.run(["pkill", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    return result.returncode == 0
+
+def start_process(process_name):
+    result = subprocess.run(["python3", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
 if broker_installed(): #calls the functions to check if the broker is installed and if not installs it
@@ -81,13 +88,22 @@ else:
 
 if is_running("mosquitto_pub"):
     print("publisher is running")
+    print("publisher is now being stopped and restarted.")
+    kill_process("mosquitto_pub")
+    start_process("mosquitto_pub")
 else:
     print("publisher is not running")
+    start_process("mosquitto_pub")
 
 if is_running("mosquitto_sub"):
     print("subscriber is running")
+    print("subscriber is now being stopped and restarted.")
+    kill_process("mosquitto_sub")
+    start_process("mosquitto_sub")
+
 else:
     print("subscriber is not running")
+    start_process("mosquitto_sub")
 
 
 
