@@ -22,6 +22,10 @@ def broker_active(): #checks if the broker is running
     )
     return result.returncode == 0
 
+def is_running(mos_part): #checks logic for the publisher and subscriber
+    result = subprocess.run([f"systemctl", "is-active", {mos_part}])
+    return result.returncode == 0
+
 if broker_installed(): #calls the functions to check if the broker is installed and if not installs it
     print("broker is installed")
 else:
@@ -38,6 +42,16 @@ if broker_active(): #calls the function to check if the broker is active
     print("broker is running")
 else:
     print("broker is not running")
+
+if is_running("mosquitto_pub"):
+    print("publisher is running")
+else:
+    print("publisher is not running")
+
+if is_running("mosquitto_sub"):
+    print("subscriber is running")
+else:
+    print("subscriber is not running")
 
 
 
