@@ -40,12 +40,6 @@ def start_process(process_name):
 
 subprocess.run(["tmux", "attach", "-t", "mqtt_session"])
 
-for i in range(10, 0, -1):
-    print(f"Attaching tmux in {i} seconds")
-    time.sleep(1)
-
-
-
 if broker_installed(): #calls the functions to check if the broker is installed and if not installs it
     print("broker is installed")
 else:
