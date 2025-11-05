@@ -60,20 +60,20 @@ if is_running("mosquitto_pub"):
     print("publisher is running")
     print("publisher is now being stopped and restarted.")
     kill_process("mosquitto_pub")
-    start_process("publisher.py")
+    start_process(" publisher.py")
 else:
     print("publisher is not running")
-    start_process("publisher.py")
+    start_process(" publisher.py")
 
 if is_running("mosquitto_sub"):
     print("subscriber is running")
     print("subscriber is now being stopped and restarted.")
     kill_process("mosquitto_sub")
-    start_process("subscriber.py")
+    start_process(" subscriber.py")
 
 else:
     print("subscriber is not running")
-    start_process("subscriber.py")
+    start_process(" subscriber.py")
 
 
 
