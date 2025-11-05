@@ -63,7 +63,7 @@ if is_running("mosquitto_pub"):
     start_process("publisher.py")
 else:
     print("publisher is not running")
-    start_process("mosquitto_pub")
+    start_process("publisher.py")
 
 if is_running("mosquitto_sub"):
     print("subscriber is running")
@@ -73,7 +73,7 @@ if is_running("mosquitto_sub"):
 
 else:
     print("subscriber is not running")
-    start_process("mosquitto_sub")
+    start_process("subscriber.py")
 
 
 
