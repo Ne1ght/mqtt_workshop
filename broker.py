@@ -23,7 +23,7 @@ def broker_active(): #checks if the broker is running
     return result.returncode == 0
 
 def is_running(mos_part): #checks logic for the publisher and subscriber
-    result = subprocess.run([f"systemctl", "is-active", {mos_part}])
+    result = subprocess.run(["pgrep", "-f", mos_part], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
 if broker_installed(): #calls the functions to check if the broker is installed and if not installs it
