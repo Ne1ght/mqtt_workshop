@@ -11,4 +11,7 @@ for i in range(10, 0, -1):
     print(f"waiting to attach: {i} seconds")
     time.sleep(1)
 
-subprocess.run(["python3", "broker.py"])
+subprocess.run([
+    "tmux", "new-session", "-d", "-s", "mqtt_session",
+    ";", "send-keys", "python3 broker.py", "Enter"
+], shell=True)
