@@ -1,4 +1,5 @@
 import subprocess
+import time
 
 
 def broker_installed(): #checks if mosqutitto is installed or not
@@ -37,7 +38,10 @@ def start_process(process_name):
     result = subprocess.run(["python3", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
-
+for i in range(5, 0, -1):
+    print(f"Attaching tmux in {i} seconds")
+    time.sleep(1)
+subprocess.run(["tmux", "attach", "-t", "mqtt_session"])
 
 
 if broker_installed(): #calls the functions to check if the broker is installed and if not installs it

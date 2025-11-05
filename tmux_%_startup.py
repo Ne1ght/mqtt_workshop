@@ -1,5 +1,5 @@
 import subprocess
-import time
+
 
 def tmux_installed(): #checks if tmux is installed
     result = subprocess.run(["which", "tmux"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -13,7 +13,7 @@ def install_tmux(): #installs tmux
     return True
 
 def created_tmux_session(): #starts tmux to manage the mqtt session
-    result = subprocess.run(["tmux", "new-session", "-d", "-s", "mqtt_session", "bash", "-c" "python3 broker.py"], capture_output=True, text=True)
+    result = subprocess.run(["tmux", "new-session", "-d", "-s", "mqtt_session"], capture_output=True, text=True)
     if result.returncode != 0:
         print("tmux session creation failed:", result.stderr)
         return False
@@ -41,11 +41,3 @@ else:
     else:
         print("tmux could not be installed! Please review code and fix.")
 
-for i in range(5, 0, -1):
-    print(f"Attaching tmux in {i} seconds")
-    time.sleep(1)
-subprocess.run(["tmux", "attach", "-t", "mqtt_session"])
-
-
-
-#start_process("broker.py")
