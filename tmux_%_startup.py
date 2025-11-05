@@ -1,4 +1,5 @@
 import subprocess
+import time
 
 def tmux_installed(): #checks if tmux is installed
     result = subprocess.run(["which", "tmux"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -40,4 +41,11 @@ else:
     else:
         print("tmux could not be installed! Please review code and fix.")
 
+
+subprocess.run(["tmux", "attach", "-t", "mqtt_session"])
+
+
+for i in range(5, 0, -1):
+    print(f"Attaching tmux in {i} seconds")
+    time.sleep(1)
 start_process("broker.py")
