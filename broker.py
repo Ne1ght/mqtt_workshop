@@ -35,7 +35,7 @@ def kill_process(process_name):
     return result.returncode == 0
 
 def start_process(process_name):
-    result = subprocess.run(["python3", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    result = subprocess.run(["tmux", "-s", "mqtt_session", ";" "send-keys", "python3 process_name", "Enter"],shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
 if broker_installed(): #calls the functions to check if the broker is installed and if not installs it
