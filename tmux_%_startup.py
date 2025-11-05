@@ -13,7 +13,7 @@ def install_tmux(): #installs tmux
     return True
 
 def created_tmux_session(): #starts tmux to manage the mqtt session
-    result = subprocess.run(["tmux", "new-session", "-d", "-s", "mqtt_session", "python 3 broker.py"], capture_output=True, text=True)
+    result = subprocess.run(["tmux", "new-session", "-d", "-s", "mqtt_session", "python3 broker.py"], capture_output=True, text=True)
     if result.returncode != 0:
         print("tmux session creation failed:", result.stderr)
         return False
