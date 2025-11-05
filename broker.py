@@ -10,7 +10,8 @@ def install_broker():
     if install_mosquitto.returncode != 0:
         print("mosquitto installation failed:", install_mosquitto.stderr)
         return False
-    install_client = subprocess.run(["sudo", "apt", "install", "-y" "mosquitto-clients"], capture_output=True, text=True)
+
+    install_client = subprocess.run(["sudo", "apt", "install", "-y", "mosquitto-clients"], capture_output=True, text=True)
     if install_client.returncode != 0:
         print("Client installation failed:", install_client.stderr)
         return False
