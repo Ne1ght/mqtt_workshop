@@ -60,6 +60,7 @@ else:
 if tmux_installed(): #calls the functions to check, install and start tmux to manage the mqtt session in ssh over one window
     print("tmux is installed")
     print("starting tmux now.")
+    input("Press any key to continue and start tmux session...")
     created_tmux_session()
 else:
     print("tmux is not installed!")
@@ -67,6 +68,7 @@ else:
     if install_tmux():
         print("tmux installation successful")
         print("starting tmux now.")
+        input("Press any key to continue and start tmux session...")
         created_tmux_session()
     else:
         print("tmux could not be installed! Please review code and fix.")
