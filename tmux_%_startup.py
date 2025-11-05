@@ -20,7 +20,8 @@ def created_tmux_session(): #starts tmux to manage the mqtt session
     return True
 
 def start_process(process_name):
-    result = subprocess.run(["python3", process_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    result = subprocess.run(["tmux", "send-keys", "-t", "mqtt_session:0.0", f"python3 {process_name}", "C-m"]
+, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return result.returncode == 0
 
 if tmux_installed(): #calls the functions to check, install and start tmux to manage the mqtt session in ssh over one window
