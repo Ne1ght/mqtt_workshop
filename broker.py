@@ -35,7 +35,7 @@ def kill_process(process_name):
     return result.returncode == 0
 
 def start_process(process_name):
-    cmd = f"tmux send-keys -t mqtt_session:0.0 python3 {process_name} enter"
+    cmd = f"tmux send-keys -t mqtt_session:0.0 python3 space {process_name} enter"
     result = subprocess.run(cmd,shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     print("test")
     return result.returncode == 0
@@ -60,20 +60,20 @@ if is_running("mosquitto_pub"):
     print("publisher is running")
     print("publisher is now being stopped and restarted.")
     kill_process("mosquitto_pub")
-    start_process(" publisher.py")
+    start_process("publisher.py")
 else:
     print("publisher is not running")
-    start_process(" publisher.py")
+    start_process("publisher.py")
 
 if is_running("mosquitto_sub"):
     print("subscriber is running")
     print("subscriber is now being stopped and restarted.")
     kill_process("mosquitto_sub")
-    start_process(" subscriber.py")
+    start_process("subscriber.py")
 
 else:
     print("subscriber is not running")
-    start_process(" subscriber.py")
+    start_process("subscriber.py")
 
 
 
