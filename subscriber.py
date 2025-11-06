@@ -4,7 +4,7 @@ import json
 
 subprocess.run(["tmux", "split-window", "-h", "-t", "mqtt_session:0.1"])
 subprocess.run(["tmux", "send-keys", "-t", "mqtt_session:0.2",
-                "mosquitto_sub -h localhost -t sensor1/motd", "C-m"])
+                "mosquitto_sub -h mqtt.eclipseprojects.io -t sensor1/motd", "C-m"])
 
 broker = "mqtt.eclipseprojects.io"
 topic = "demo/sensor/temp_feuchte"
@@ -18,7 +18,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     daten = json.loads(msg.payload.decode())
-    print(f"Empfangen - Temperatur: {daten['teemperatur']}°C, Feuchtigkeit: {daten['feuchtigkeit']}%")
+    print(f"Empfangen - Temperatur: {daten['temperatur']}°C, Feuchtigkeit: {daten['feuchtigkeit']}%")
 
 client = mqtt.Client()
 client.on_connect = on_connect
