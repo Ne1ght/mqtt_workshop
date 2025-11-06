@@ -56,6 +56,7 @@ if broker_active(): #calls the function to check if the broker is active
     print("broker is running")
 else:
     print("broker is not running")
+    start_process(["sudo", "systemctl", "enable", "mosquitto"])
 
 
 subprocess.run(["sudo", "apt", "install", "-y", "python3-paho-mqtt"], check=True)
