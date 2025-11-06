@@ -6,9 +6,9 @@ import json
 
 subprocess.run(["tmux", "split-window", "-v", "-t", "mqtt_session:0.0"])
 subprocess.run(["tmux", "send-keys", "-t", "mqtt_session:0.1",
-                'mosquitto_pub -h mqtt.eclipseprojects.io -t sensor1/motd -m "Good morning!"', "C-m"])
+                'mosquitto_pub -h localhost -t sensor1/motd -m "Good morning!"', "C-m"])
 
-broker = "mqtt.eclipseprojects.io"
+broker = "localhost"
 topic = "demo/sensor/temp_feuchte"
 
 client = mqtt.Client()
