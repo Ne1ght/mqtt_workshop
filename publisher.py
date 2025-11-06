@@ -20,7 +20,7 @@ def start_process(process_name):
     print("test")
     return result.returncode == 0
 
-start_process("subscriber.py")
+start_process(["sudo", "systemctl", "enable", "mosquitto"])
 
 while True:
     temperatur = round(random.uniform(20.0, 30.0), 2)
