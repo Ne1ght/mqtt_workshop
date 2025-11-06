@@ -2,10 +2,6 @@ import subprocess
 import paho.mqtt.client as mqtt
 import json
 
-subprocess.run(["tmux", "split-window", "-h", "-t", "mqtt_session:0.1"])
-subprocess.run(["tmux", "send-keys", "-t", "mqtt_session:0.2",
-                "mosquitto_sub -h localhost -t sensor1/motd", "C-m"])
-
 broker = "localhost"
 topic = "demo/sensor/temp_feuchte"
 

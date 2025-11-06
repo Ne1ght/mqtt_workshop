@@ -74,11 +74,11 @@ if is_running("mosquitto_sub"):
     print("subscriber is running")
     print("subscriber is now being stopped and restarted.")
     kill_process("mosquitto_sub")
-    start_process("subscriber.py", "0.1")
+    start_process("subscriber_tmux_fallback.py", "0.1")
 
 else:
     print("subscriber is not running")
-    start_process("subscriber.py", "0.1")
+    start_process("subscriber_tmux_fallback.py", "0.1")
 
 
 
