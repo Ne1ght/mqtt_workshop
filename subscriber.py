@@ -14,7 +14,7 @@ def on_connect(client, userdata, flags, rc):
         print("Verbunden zum Broker")
         client.subscribe(topic)
     else:
-        print("Verbindungsfehler:" rc)
+        print("Verbindungsfehler:", rc)
 
 def on_message(client, userdata, msg):
     daten = json.loads(msg.payload.decode())
