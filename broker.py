@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import time
 
 
@@ -55,6 +56,10 @@ if broker_active(): #calls the function to check if the broker is active
     print("broker is running")
 else:
     print("broker is not running")
+
+
+subprocess.run(["sudo", sys.executable, "-m", "pip", "install", "--upgrade", "pip"], check=True)
+subprocess.run(["sudo", sys.executable, "-m", "pip", "install", "paho-mqtt"], check=True)
 
 if is_running("mosquitto_pub"):
     print("publisher is running")
