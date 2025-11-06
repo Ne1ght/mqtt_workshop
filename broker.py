@@ -59,7 +59,8 @@ else:
 
 
 subprocess.run(["sudo", sys.executable, "-m", "pip", "install", "--upgrade", "pip"], check=True)
-subprocess.run(["sudo", sys.executable, "-m", "pip", "install", "paho-mqtt"], check=True)
+venv_python = "/home/pi/mqtt_env/bin/python"
+subprocess.run([venv_python, "-m", "pip", "install", "paho-mqtt"], check=True)
 
 if is_running("mosquitto_pub"):
     print("publisher is running")
