@@ -14,6 +14,14 @@ topic = "demo/sensor/temp_feuchte"
 client = mqtt.Client()
 client.connect(broker, 1883, 60)
 
+def start_process(process_name):
+    cmd = f"tmux send-keys -t mqtt_session:0.0 python3 space {process_name} enter"
+    result = subprocess.run(cmd,shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    print("test")
+    return result.returncode == 0
+
+start_process("subscriber.py")
+
 while True:
     temperatur = round(random.uniform(20.0, 30.0), 2)
     feuchtigkeit = round(random.uniform(20.0, 70.0), 2)
