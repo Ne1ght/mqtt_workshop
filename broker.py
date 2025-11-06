@@ -58,7 +58,6 @@ else:
     print("broker is not running")
 
 
-subprocess.run(["sudo", sys.executable, "-m", "pip", "install", "--upgrade", "pip"], check=True)
 subprocess.run(["sudo", "apt", "install", "-y", "python3-paho-mqtt"], check=True)
 
 if is_running("mosquitto_pub"):
