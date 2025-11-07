@@ -12,3 +12,6 @@ Y
 um tmux Feenster zu wechseln
 strg + B
 Pfeil nach links/oben/rechts/unten
+
+um alle dependancys zu löschen
+sudo apt purge mosquitto mosquitto-clients tmux python3-paho-mqtt
